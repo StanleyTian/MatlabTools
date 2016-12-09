@@ -1,0 +1,52 @@
+Contents of LBP:
+
+getmapping                     - returns a structure containing a mapping table for LBP codes.
+lbp                            - returns the local binary pattern image or LBP histogram of an image.
+
+
+lbp is both a directory and a function.
+
+ LBP returns the local binary pattern image or LBP histogram of an image.
+LBP返回图像的LBP图像或者是图像的LBP直方图（所以得补一下LBP的基本知识）
+   J = LBP(I,R,N,MAPPING,MODE) returns either a local binary pattern
+   coded image or the local binary pattern histogram of an intensity
+   image I. The LBP codes are computed using N sampling points on a
+   circle of radius R and using mapping table defined by MAPPING.
+I代表图像
+R代表环形LBP算法的半径
+N代表采样频率
+MAPPING？？？
+MODE
+
+   See the getmapping function for different mappings and use 0 for
+   no mapping. Possible values for MODE are
+getmapping函数有不同的MAPPING参数可以使用或者用0代表不使用
+        'h' or 'hist'  to get a histogram of LBP codes
+'h' or 'hist'得到LBP编码的直方图
+        'nh'           to get a normalized histogram
+'nh' 得到标准化的直方图
+   Otherwise an LBP code image is returned.
+0 代表LBP灰度图
+
+   J = LBP(I) returns the original (basic) LBP histogram of image I
+ 只传入图像的参数，返回原始的LBP直方图
+   J = LBP(I,SP,MAPPING,MODE) computes the LBP codes using n sampling
+   points defined in (n * 2) matrix SP. The sampling points should be
+   defined around the origin (coordinates (0,0)).
+SP是（n * 2）维的矩阵
+
+   Examples
+   --------
+        I=imread('rice.png');
+        mapping=getmapping(8,'u2');
+        H1=LBP(I,1,8,mapping,'h'); %LBP histogram in (8,1) neighborhood
+                                   %using uniform patterns
+        subplot(2,1,1),stem(H1);
+
+        H2=LBP(I);
+        subplot(2,1,2),stem(H2);
+
+        SP=[-1 -1; -1 0; -1 1; 0 -1; -0 1; 1 -1; 1 0; 1 1];
+        I2=LBP(I,SP,0,'i'); %LBP code image using sampling points in SP
+                            %and no mapping. Now H2 is equal to histogram
+                            %of I2.
