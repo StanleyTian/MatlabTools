@@ -1,4 +1,10 @@
-lbps = images_to_lbps('dataset/testimages/',13);
-libsvm_data = lbps_to_libsvm_data(lbps,'+1');
+clear;
+clc;
+folder_path = '/Users/shidanlifuhetian/Desktop/TestField/sampleA/';
+total_images_count = 58;
+class = '+1';
+output_file_full_path = '/Users/shidanlifuhetian/Desktop/TestField/Adata_scale.txt';
 
-libsvm_data_to_file(libsvm_data,'dataset/data_scale.txt');
+lbps = images_to_lbps(folder_path,total_images_count);
+libsvm_data = lbps_to_libsvm_data(lbps,class);
+libsvm_data_to_file(libsvm_data,output_file_full_path);
